@@ -24,51 +24,43 @@ document.getElementById('client-form')?.addEventListener('submit', function (eve
     clients.push({ name, phone, address });
     alert('Cliente cadastrado com sucesso!');
 });
-
-function buscarEndereco() {
-    const cep = document.getElementById("client-cep").value.trim();
-
-    if (!/^\d{8}$/.test(cep)) {
-        alert("Por favor, insira um CEP válido (8 números).");
-        limparCamposEndereco();
-        return;
-    }
-
-    const url = `https://viacep.com.br/ws/${cep}/json/`;
-
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao buscar o CEP");
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.erro) {
-                alert("CEP não encontrado.");
-                limparCamposEndereco();
-            } else {
-                document.getElementById("client-street").value = data.logradouro || '';
-                document.getElementById("client-neighborhood").value = data.bairro || '';
-                document.getElementById("client-city").value = data.localidade || '';
-                document.getElementById("client-state").value = data.uf || '';
-            }
-        })
-        .catch(error => {
-            alert("Erro ao consultar o CEP. Tente novamente.");
-            console.error("Erro:", error);
-            limparCamposEndereco();
-        });
+function pesquisacep(valor) {
+    var cep = valor.replace(/\D/g, '');
+if (cep != "") {
+   var validacep = /^[0-9]{8}$/;
+if(validacep.test(cep)) {
+   document.getElementById('estado').value="...";
+   document.getElementById('cidade').value="...";
+   document.getElementById('bairro').value="...";
+   document.getElementById('rua').value="...";
+   var script = document.createElement('script');
+   script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+   document.body.appendChild(script);
+} else {
+   limpa_formulario_cep();
+   alert("Formato de CEP inválido.");
 }
-
-
-function limparCamposEndereco() {
-    document.getElementById("client-street").value = "";
-    document.getElementById("client-neighborhood").value = "";
-    document.getElementById("client-city").value = "";
-    document.getElementById("client-state").value = "";
+} else {
+    limpa_formulario_cep();
 }
-
+}
+function limpa_formulario_cep() {
+   document.getElementById('estado').value=("");
+   document.getElementById('cidade').value=("");
+   document.getElementById('bairro').value=("");
+   document.getElementById('rua').value=("");
+}
+function meu_callback(conteudo) {
+   if (!("erro" in conteudo)) {
+       document.getElementById('estado').value=(conteudo.uf);
+       document.getElementById('cidade').value=(conteudo.localidade);
+       document.getElementById('bairro').value=(conteudo.bairro);
+       document.getElementById('rua').value=(conteudo.logradouro);
+   } else {
+   limpa_formulario_cep();
+   alert("CEP não encontrado.");
+}
+}
 
 function showHistory() {
     const historyList = document.getElementById('history-list');

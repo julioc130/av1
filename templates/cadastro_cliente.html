@@ -3,61 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente</title>
-    <!-- Adicionando o Bootstrap -->
+    <title>cadastro de cliente</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body class="bg-light">
-    <div class="container mt-5 p-4 bg-white rounded shadow">
-        <h2 class="text-center text-primary mb-4">Cadastro de Cliente</h2>
-        <form id="client-form">
-            <div class="mb-3">
-                <label for="client-name" class="form-label">Nome do Cliente:</label>
-                <input type="text" class="form-control" id="client-name" required>
-            </div>
 
-            <div class="mb-3">
-                <label for="client-phone" class="form-label">Telefone:</label>
-                <input type="text" class="form-control" id="client-phone" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="client-cep" class="form-label">CEP:</label>
-                <input type="text" class="form-control" id="client-cep" maxlength="8" required onblur="buscarEndereco()">
-            </div>
-
-            <div class="mb-3">
-                <label for="client-street" class="form-label">Endereço:</label>
-                <input type="text" class="form-control" id="client-street" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="client-neighborhood" class="form-label">Bairro:</label>
-                <input type="text" class="form-control" id="client-neighborhood" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="client-city" class="form-label">Cidade:</label>
-                <input type="text" class="form-control" id="client-city" readonly>
-            </div>
-
-            <div class="mb-3">
-                <label for="client-state" class="form-label">Estado:</label>
-                <input type="text" class="form-control" id="client-state" readonly>
-            </div>
-
-            <button type="submit" class="btn btn-success w-100 mt-3">Cadastrar Cliente</button>
-        </form>
-
-        <div class="d-flex justify-content-between mt-3">
-            <a href="dashboard.html" class="btn btn-secondary">Voltar ao Dashboard</a>
-            <a href="login.html" class="btn btn-danger">Sair</a>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="login-container bg-white p-4  rounded shadow w-100 h-50" style="max-width: 500px;">
+            <h1 class="text-center text-primary fs-2 mt-4 mb-4 fw-bold">Cadastro Do Cliente</h1>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="username" class="form-label mb-2 mt-2 fs-5">Usuário:</label>
+                    <input type="text" id="username" class="form-control mb-3 p-3" placeholder="Digite seu Usuário" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class=" mb-2 mt-1 fs-5">Senha:</label>
+                    <input type="password" id="password" class="form-control mb-4 p-3" placeholder="Digite sua Senha" required>
+                </div>
+                <div class="d-flex align-items-center justify-content-center" style="height: 50px;">
+                <button type="submit" class=" btn btn-primary w-50 p-2 ">Entrar</button>
+                </div>
+              </form>
         </div>
     </div>
 
     <script src="script.js"></script>
     <!-- Adicionando o Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = "login.html";
+        });
+    </script>
 </body>
 </html>
