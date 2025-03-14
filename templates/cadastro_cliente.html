@@ -36,9 +36,10 @@
 
     <script>
         document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            window.location.href = "login.html";
+            event.preventDefault(); 
+            window.location.href = "{% url 'login' %}"; 
         });
     </script>
+    
 </body>
 </html>

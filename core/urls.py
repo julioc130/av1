@@ -1,5 +1,8 @@
+
+
 from django.urls import path
 from users import views
+
 
 urlpatterns = [
     path('', views.cadastrar_cliente, name='cadastrar_cliente'),
